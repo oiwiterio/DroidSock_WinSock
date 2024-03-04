@@ -226,7 +226,7 @@ int text_server()
         }
 
 
-        
+        // Pay attention here, The original plan was to continue bind while notepad was closed, but it backfired.
         ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         bool notepad = false;
         const char* notepadTitle = "lastget.txt - Notepad";
@@ -278,7 +278,6 @@ int text_server()
 
 
         // 接收数据直到客户端关闭连接
-        // 
         using namespace std;
         ofstream ofile("lastget.txt", ios::binary);
         do {
@@ -290,7 +289,10 @@ int text_server()
             else if (iResult == 0)
             {
                 ofile.close();
+                // Pay attention here, The original plan was to continue bind while notepad was closed, but it backfired.
+                ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                 system("start \"\" \"C:\\Windows\\System32\\notepad.exe\" \"lastget.txt\" ");
+                ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                 printf("\n接收完毕\n");
             }
             else printf("\n接收失败\n");
